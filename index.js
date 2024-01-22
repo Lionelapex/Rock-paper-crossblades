@@ -1,4 +1,5 @@
 // all  button elements
+alert("please reduce your browser window to 50% im still working on the ui")
 const rockButton = document.querySelector("button.rock");
 const paperbutton = document.querySelector("button.paper");
 const scissorsButton = document.querySelector("button.scissors");
