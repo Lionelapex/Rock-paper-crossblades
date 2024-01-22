@@ -1,97 +1,192 @@
-// const items =["one","two","three"]
-//  const random= items[Math.floor(Math.random()*items.length)]
-//  console.log(random)
+// all  button elements
+const rockButton = document.querySelector("button.rock");
+const paperbutton = document.querySelector("button.paper");
+const scissorsButton = document.querySelector("button.scissors");
 
-// computer randomly chooses rock paper scissors
+// computer images
+const rock = document.querySelector("p.rock");
+const paper = document.querySelector("p.paper");
+const scissors = document.querySelector("p.scissors");
 
-function getComputerChoice(computerchoice = ["Rock", "Paper", "Scissors"]) {
-	return computerchoice[Math.floor(Math.random() * computerchoice.length)].toLowerCase();
-}
+// score elements 
+const score =document.querySelector('div.score')
 
-// tracks score
-var PlayerScore = 0;
-var computerScore = 0;
-// play round function
+// 
+//  main constainer  stores button
 
-function playRound(
-	playerSelection = window.prompt("rock ,paper,scissors").toLowerCase(),
-	computerSelection = getComputerChoice()
+
+// display slection
+const displayPlayerSelection = document.querySelector("div.viewPlayer");
+const displayComputerSelection = document.querySelector("div.viewComp");
+
+// global score variables
+let playerScore=0
+let computerScore=0
+
+
+
+//  get random computer choice
+
+// click events
+rockButton.addEventListener("click", () => {
+	
+	playRound(rockButton, getComputerChoice());
+	checkScore()
+});
+
+paperbutton.addEventListener("click", () => {
+	playRound(paperbutton, getComputerChoice());
+	checkScore()
+});
+
+scissorsButton.addEventListener("click", () => {
+	playRound(scissorsButton, getComputerChoice()); 
+	checkScore()  // check the score when click
+});
+
+
+// functions
+function getComputerChoice(
+	computerchoice = [rockButton, paperbutton, scissorsButton]
 ) {
-	// incase of draw
+	return computerchoice[Math.floor(Math.random() * computerchoice.length)];
+}
 
-	// if the  player wins
-	if (playerSelection === "rock" && computerSelection === "scissors") {
-		alert(
-			`ohh seems like ${playerSelection} beat ${computerSelection} you win`
-		);
-		//  updating the player score
-		PlayerScore = PlayerScore + 1;
-	} else if (playerSelection === "paper" && computerSelection === "rock") {
-		alert(
-			`ohh seems like ${playerSelection} beat ${computerSelection} you win`
-		);
-		//  updating the player score
-		PlayerScore = PlayerScore + 1;
-	} else if (playerSelection === "scissors" && computerSelection === "paper") {
-		alert(
-			`ohh seems like ${playerSelection} beat ${computerSelection} you win`
-		);
-		//  updating the player score
-		PlayerScore = PlayerScore + 1;
+
+const showImageAndText = (playview, compview) => {
+	// player selection
+	if (playview === rockButton && compview === scissorsButton) {
+		displayPlayerSelection.innerHTML = `<h1> Rock</> `;
+		rock.style = "display:block";
+		displayPlayerSelection.append(rock);
+
+		displayComputerSelection.innerHTML = `<h1>Scissors</h1>`;
+		scissors.style = "display:block";
+		displayComputerSelection.append(scissors);
+	} else if (playview === paperbutton && compview === rockButton) {
+		displayPlayerSelection.innerHTML = `<h1> paper</> `;
+		paper.style = "display:block";
+		displayPlayerSelection.append(paper);
+
+		displayComputerSelection.innerHTML = `<h1>Rock</h1>`;
+		rock.style = "display:block";
+		displayComputerSelection.append(rock);
+	} else if (playview === scissorsButton && compview === paperbutton) {
+		displayPlayerSelection.innerHTML = `<h1> Scissors</> `;
+		scissors.style = "display:block";
+		displayPlayerSelection.append(scissors);
+
+		displayComputerSelection.innerHTML = `<h1>Paper</h1>`;
+		paper.style = "display:block";
+		displayComputerSelection.append(paper);
 	}
 
-	// if  the  computer wins
-	else if (computerSelection === "rock" && playerSelection === "scissors") {
-		alert(
-			`oooouu seems like ${computerSelection} beat ${playerSelection} computer win`
-		);
-		//     updating the computer score
-		computerScore = computerScore + 1;
-	} else if (computerSelection === "paper" && playerSelection === "rock") {
-		alert(
-			`ooou seems like ${computerSelection} beats ${playerSelection} computer wins  `
-		);
-		//     updating the computer score
-		computerScore = computerScore + 1;
-	} else if (computerSelection === "scissors" && playerSelection === "paper") {
-		alert(
-			`ooou seems like ${computerSelection} beats ${playerSelection} computer wins  `
-		);
-		//     updating the computer score
-		computerScore = computerScore + 1;
+	// computer wins
+	if (compview === rockButton && playview === scissorsButton) {
+		displayComputerSelection.innerHTML = `<h1>Rock</h1>`;
+		rock.style = "display:block";
+		displayComputerSelection.append(rock);
+
+		displayPlayerSelection.innerHTML = `<h1> Scissors</> `;
+		scissors.style = "display:block";
+		displayPlayerSelection.append(scissors);
+	} else if (compview === paperbutton && playview === rockButton) {
+		displayComputerSelection.innerHTML = `<h1>Paper</h1>`;
+		paper.style = "display:block";
+		displayComputerSelection.append(paper);
+
+		displayPlayerSelection.innerHTML = `<h1> Rock</> `;
+		rock.style = "display:block";
+		displayPlayerSelection.append(rock);
+	} else if (compview === scissorsButton && playview === paperbutton) {
+		displayComputerSelection.innerHTML = `<h1>Scissors</h1>`;
+		scissors.style = "display:block";
+		displayComputerSelection.append(scissors);
+
+		displayPlayerSelection.innerHTML = `<h1> Paper</> `;
+		paper.style = "display:block";
+		displayPlayerSelection.append(paper);
 	}
-	// incase for draws or ties
-	else if (playerSelection === computerSelection) {
-		alert("its a tie play again a point to each");
-		//     update both the players score and computers score
-		PlayerScore = PlayerScore + 1;
-		computerScore = computerScore + 1;
+	// ties
+	if (playview === compview) {
+		displayPlayerSelection.innerHTML = `<h1> its a tie</h1>`;
+		displayComputerSelection.innerHTML = `<h1> its a tie</h1>`;
+	}
+};
+// the game
+// playround checks if of
+function playRound(playerSelection, computerSelection) {
+	// player wins
+	if (playerSelection === rockButton && computerSelection === scissorsButton) {
+		showImageAndText(playerSelection, computerSelection);
+		playerScore=playerScore+1
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
+
+	} else if (
+		playerSelection === paperbutton &&
+		computerSelection === rockButton
+	) {
+		showImageAndText(playerSelection, computerSelection);
+		playerScore=playerScore+1
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
+	} else if (
+		playerSelection === scissorsButton &&
+		computerSelection === paperbutton
+	) {
+		showImageAndText(playerSelection, computerSelection);
+		playerScore=playerScore+1
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
+	}
+
+// computer wins
+	if (computerSelection === rockButton && playerSelection === scissorsButton) {
+		showImageAndText(playerSelection, computerSelection);
+		computerScore=computerScore+1
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
+
+	} else if (
+		computerSelection === paperbutton &&
+		playerSelection === rockButton
+	) {
+		showImageAndText(playerSelection, computerSelection);
+		computerScore=computerScore+1
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
+	} else if (
+		computerSelection === scissorsButton &&
+		playerSelection === paperbutton
+	) {
+		showImageAndText(playerSelection, computerSelection);
+		computerScore=computerScore+1
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
+	}
+
+	//  acount for ties
+	if (playerSelection === computerSelection) {
+		showImageAndText(playerSelection, computerSelection);
+		score.innerHTML=` USER :${playerScore} :  COMPUTER : ${computerScore}`
 	}
 }
 
-//  plays the game 5 times
-function game() {
-	// player score and computer score are displayed at the begining of the round
-	alert(`player score :${PlayerScore}  computer score${computerScore}`);
-	for (i = 1; i <= 5; i++) {
-		playRound();
+
+// checks score 
+const checkScore=()=>{
+	if(playerScore===5){
+		displayPlayerSelection.innerHTML="you win"
+		displayComputerSelection.innerHTML="computer lost"
+		playerScore=0
+		computerScore=0
+		
 	}
-	// displays the score at the end of the game
-	alert(`player score :${PlayerScore}  computer score${computerScore}`);
-	//  if the player score and computers score are the same we are going to go to a sudden death round
-	//  this plays a single round of
-	if (PlayerScore === computerScore) {
-		alert(
-			`hmmmm a tie , prepare for the sudden death round mwaaahhhhaahahaha`
-		);
-		for (i = 1; i < 2; i++) {
-			playRound();
-		}
+	else if(computerScore===5){
+		
+		displayComputerSelection.innerHTML="computer wins"
+		displayPlayerSelection.innerHTML="you lose"
+		computerScore=0
+		playerScore=0
+		
 	}
-	// display the scores
-	alert(`player score :${PlayerScore}  computer score${computerScore}`);
-	if (PlayerScore > computerScore) {
-		alert(` player1 wins `);
-	} else alert(` computer wins `);
 }
-game();
+
+
+
+// 

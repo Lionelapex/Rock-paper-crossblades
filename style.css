@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	justify-content: center;
+
+	margin-top: ;
+	min-height: 500px;
+	gap: 4rem;
+}
+.compcontainer{
+	display: flex;
+	justify-content: center;
+	align-items: end;
+	min-height: 500px;
+	gap: 4rem;
+	
+}
+button {
+	font-size: 4rem;
+
+	border: none;
+	cursor: pointer;
+}
+p {
+
+	font-size:5rem;
+}
+.viewPlayer{
+	font-size: 3rem;
+}
+.viewComp{
+	font-size: 3rem;
+}
+.score{
+	font-size: 2rem;
+}
