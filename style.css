@@ -2,7 +2,6 @@
 	display: flex;
 	justify-content: center;
 
-	margin-top: ;
 	min-height: 500px;
 	gap: 4rem;
 }
@@ -11,25 +10,62 @@
 	justify-content: center;
 	align-items: end;
 	min-height: 500px;
-	gap: 4rem;
+	gap:4rem;
 	
 }
 button {
-	font-size: 4rem;
-
+	font-size: 2rem;
+     
 	border: none;
 	cursor: pointer;
 }
-p {
+p{
 
-	font-size:5rem;
+    font-size:5rem;
 }
 .viewPlayer{
-	font-size: 3rem;
+	font-size: 1rem;
+	
 }
 .viewComp{
-	font-size: 3rem;
+	font-size: 1rem;
+}
+.view{
+	display: flex;
+	gap: 2rem;
+}
+
+.title{
+	display: flex;
+	justify-content: center;
+	
+}
+h1{
+	background-color: black;
+	color: white;
+	text-align: center;
+	
+}
+.main_container{
+	display: flex;
+	justify-content: center;
+	gap: 4em;
+	margin: 5em;
+	height: 422px;
+	
+}
+.grey{
+	background-color: rgb(4, 0, 0);
+	width: 30em;
 }
 .score{
-	font-size: 2rem;
+	float: right;
+	margin-right: 4em;
+}
+.compScore{
+	float: right;
+	margin-right: 4em;
+}
+body{
+	box-sizing: border-box;
 }
